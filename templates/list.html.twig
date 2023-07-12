@@ -1,0 +1,55 @@
+{% include 'header.html.twig' %}
+
+<div class="container">
+{% for post in posts %}
+    <div class="post" data-post-id="{{ post.id }}">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content }}</p>
+        <p>Created on: {{ post.date_of_creation }}</p>
+`
+
+        {# {% if post.creator_id == creatorId %}
+            <button class="delete-button" data-post-id="{{ post.id }}" data-creator-id="{{ post.creator_id }}">Delete</button>
+        {% endif %} #}
+    </div>
+    <hr>
+{% else %}
+    <p>No posts found</p>
+{% endfor %}
+</div>
+
+<div id="delete-success-message" class="delete-success-message">
+    <h3>The post was successfully deleted.</h3>
+</div>
+
+{# <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.delete-button').click(function() {
+            const postId = $(this).data('post-id');
+            const creatorId = $(this).data('creator-id');
+
+            $.ajax({
+                url: '../controller/deletePost.php',
+                method: 'POST',
+                data: { postId: postId, creatorId: creatorId },
+                success: function(response) {
+                    if (response === 'success') {
+                        $('#delete-success-message').fadeIn();
+                        setTimeout(function() {
+                            $('#delete-success-message').fadeOut();
+                        }, 2000);
+                        $('.post[data-post-id="' + postId + '"]').remove();
+                    } else {
+                        alert('Error occurred while deleting the post');
+                    }
+                },
+                error: function() {
+                    alert('Error occurred while deleting the post');
+                }
+            });
+        });
+    });
+</script> #}
+
+{% include 'footer.html.twig' %}
